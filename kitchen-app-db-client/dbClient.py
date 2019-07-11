@@ -2,6 +2,7 @@ import pymongo
 from flask import Flask
 from flask import request
 from flask_cors import CORS
+import collections
 
 app = Flask(__name__)
 CORS(app)
@@ -13,8 +14,9 @@ db = client.test
 
 actions = db.actions
 
+keys = ['action', 'station', 'dish']
+
 def find_distinct_values():
-	keys = ['action', 'station', 'dish']
 	distinct_values_dict = {}
 	for key in keys:
 		distinct_values_dict[key] = actions.find().distinct(key)
@@ -30,7 +32,15 @@ def find_filterd_values(filter_state):
 	filtered_values_list = []
 	for filtered_action in actions.find({ "$or" : [parsed_filters]}, {'_id': False}):
 		filtered_values_list.append(filtered_action)
-	return {'results' : filtered_values_list }
+	return filtered_values_list
+
+def calculate_stats(filtered_values_list):
+	aggregate_stats = { key : collections.Counter() for key in keys }
+	for row in filtered_values_list:
+		for key in keys:
+			aggregate_stats[key].update({row[key] : row['duration']})
+
+	return { key : dict(aggregate_stats[key])  for key in keys }
 
 @app.route('/initialData')
 def send_distinct_values():
@@ -40,5 +50,7 @@ def send_distinct_values():
 @app.route('/filterData', methods=['PUT'])
 def send_filtered_values():
 	filter_state = request.args.to_dict()
-	response = find_filterd_values(filter_state)
-	return response
+	filtered_values_list = find_filterd_values(filter_state)
+	aggregate_durations = calculate_stats(filtered_values_list)
+	return {'resultsList' : filtered_values_list, 'aggregateDurations' : aggregate_durations }
+	
