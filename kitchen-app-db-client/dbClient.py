@@ -39,7 +39,7 @@ def send_distinct_values():
 	return distinct_values_dict
 
 @app.route('/filterData')
-def send_filtered_values():
+def send_filtered_values(methods=['PUT']):
 	filters = request.args.get('filters')
 	filtered_values_list = find_filterd_values(filters)
 	return filtered_values_list
