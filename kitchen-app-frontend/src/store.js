@@ -7,9 +7,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
   	filterValues : {
-  		action : [],
-  		dish : [],
-  		station : []
+  		action : ["any"],
+  		dish : ["any"],
+  		station : ["any"]
   	},
   	selectedValues : {
 	  	action : "any",

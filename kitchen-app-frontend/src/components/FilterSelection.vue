@@ -1,6 +1,5 @@
 <template>
   <div class="filter">
-    {{selectedValues}}
     <div v-for="key in filterKeys">
       <label for="component-dropdown"> {{ key }} </label>
       <dropdown id="component-dropdown" :filterKey="key" :options="allOptions[key]"></dropdown>
