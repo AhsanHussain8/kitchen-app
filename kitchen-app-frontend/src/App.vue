@@ -20,7 +20,7 @@ export default {
       ])
   },
   mounted () {
-    this.FIND_INITIAL_VALUES();
+    //this.FIND_INITIAL_VALUES();
     this.FIND_FILTERED_DATA();
   },
 }
