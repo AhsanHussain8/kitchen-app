@@ -7,12 +7,23 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import { mapActions } from 'vuex';
 
 export default {
   name: 'app',
   components: {
     HelloWorld
-  }
+  },
+  methods: {
+    ...mapActions([
+      'FIND_INITIAL_VALUES',
+      'FIND_FILTERED_DATA'
+      ])
+  },
+  mounted () {
+    this.FIND_INITIAL_VALUES();
+    this.FIND_FILTERED_DATA();
+  },
 }
 </script>
 
