@@ -1,9 +1,9 @@
 <template>
   <div class="filter">
-    <div v-for="key in filterKeys">
+    <span v-for="key in filterKeys">
       <label for="component-dropdown"> {{ key }} </label>
       <dropdown id="component-dropdown" :filterKey="key" :options="allOptions[key]"></dropdown>
-    </div>
+    </span>
   </div>
   
 </template>
