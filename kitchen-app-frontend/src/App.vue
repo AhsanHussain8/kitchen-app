@@ -15,12 +15,10 @@ export default {
   },
   methods: {
     ...mapActions([
-      'FIND_INITIAL_VALUES',
       'FIND_FILTERED_DATA'
       ])
   },
   mounted () {
-    //this.FIND_INITIAL_VALUES();
     this.FIND_FILTERED_DATA();
   },
 }

@@ -33,8 +33,7 @@ export default new Vuex.Store({
 
   },
   mutations: {
-  	UPDATE_INITIAL_VALUES ({ state }, filterValues ) {
-  		console.log(filterValues)
+  	UPDATE_DISTINCT_VALUES ({ state }, filterValues ) {
   		this.state.filterValues = filterValues;
   	},
   	UPDATE_FILTER_RESULTS ({ state }, results ) {
@@ -50,19 +49,6 @@ export default new Vuex.Store({
 
   },
   actions: {
-  	FIND_INITIAL_VALUES ({ commit }) {
-  		const request = {
-  			method: 'GET',
-  			url: 'http://localhost:5000/initialData'
-  		};
-
-  		axios(request).then( function(response) {
-  			commit('UPDATE_INITIAL_VALUES', response.data);
-  		})
-  		.catch(function (error) {
-  			console.log(error);
-  		});
-  	},
   	FIND_FILTERED_DATA ({ commit, state }) {
   		const selectedValues = this.state.selectedValues;
   		const request = {
@@ -77,7 +63,7 @@ export default new Vuex.Store({
 
   		axios(request).then( function(response) {
   			commit('UPDATE_FILTER_RESULTS', response.data['resultsList']);
-  			commit('UPDATE_INITIAL_VALUES', response.data['distinctValues']);
+  			commit('UPDATE_DISTINCT_VALUES', response.data['distinctValues']);
   			commit('UPDATE_AGGREGATE_DURATIONS', response.data['aggregateDurations']);
   		})
   		.catch(function (error) {
