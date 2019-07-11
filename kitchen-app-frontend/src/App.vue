@@ -15,10 +15,14 @@ export default {
     HelloWorld
   },
   methods: {
-    ...mapActions(['FIND_FILTER_VALUES'])
+    ...mapActions([
+      'FIND_INITIAL_VALUES',
+      'FIND_FILTERED_DATA'
+      ])
   },
   mounted () {
-    this.FIND_FILTER_VALUES();
+    this.FIND_INITIAL_VALUES();
+    this.FIND_FILTERED_DATA();
   },
 }
 </script>
