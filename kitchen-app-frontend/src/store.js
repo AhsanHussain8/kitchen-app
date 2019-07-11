@@ -34,6 +34,7 @@ export default new Vuex.Store({
   },
   mutations: {
   	UPDATE_INITIAL_VALUES ({ state }, filterValues ) {
+  		console.log(filterValues)
   		this.state.filterValues = filterValues;
   	},
   	UPDATE_FILTER_RESULTS ({ state }, results ) {
@@ -76,6 +77,7 @@ export default new Vuex.Store({
 
   		axios(request).then( function(response) {
   			commit('UPDATE_FILTER_RESULTS', response.data['resultsList']);
+  			commit('UPDATE_INITIAL_VALUES', response.data['distinctValues']);
   			commit('UPDATE_AGGREGATE_DURATIONS', response.data['aggregateDurations']);
   		})
   		.catch(function (error) {
