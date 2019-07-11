@@ -15,7 +15,7 @@ export default new Vuex.Store({
   	dishFilterValue : "any",
   	stationFilterValue : "any",
   	filterResults: [], 
-  	aggregateStats : {
+  	aggregateDurations : {
   		action : {},
   		dish : {},
   		station : {}
@@ -32,8 +32,8 @@ export default new Vuex.Store({
   	UPDATE_FILTER_RESULTS ({ state }, results ) {
   		this.state.filterResults = results;
   	},
-  	UPDATE_AGGREGATE_STATS({state}, stats ) {
-  		this.state.aggregateStats = stats;
+  	UPDATE_AGGREGATE_STATS({state}, durations ) {
+  		this.state.aggregateDurations = durations;
   	}
 
   },
@@ -64,7 +64,7 @@ export default new Vuex.Store({
 
   		axios(request).then( function(response) {
   			commit('UPDATE_FILTER_RESULTS', response.data['resultsList'])
-  			commit('UPDATE_AGGREGATE_STATS', response.data['aggregateStats'])
+  			commit('UPDATE_AGGREGATE_DURATIONS', response.data['aggregateDurations'])
   		})
   		.catch(function (error) {
   			console.log(error);

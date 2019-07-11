@@ -51,8 +51,8 @@ def send_distinct_values():
 def send_filtered_values():
 	filter_state = request.args.to_dict()
 	filtered_values_list = find_filterd_values(filter_state)
-	aggregate_stats = calculate_stats(filtered_values_list)
-	return {'resultsList' : filtered_values_list, 'aggregateStats' : aggregate_stats }
+	aggregate_durations = calculate_stats(filtered_values_list)
+	return {'resultsList' : filtered_values_list, 'aggregateDurations' : aggregate_durations }
 
 
 def calculated_stats(filtered_values_list):
