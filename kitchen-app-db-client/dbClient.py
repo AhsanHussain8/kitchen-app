@@ -53,15 +53,4 @@ def send_filtered_values():
 	filtered_values_list = find_filterd_values(filter_state)
 	aggregate_durations = calculate_stats(filtered_values_list)
 	return {'resultsList' : filtered_values_list, 'aggregateDurations' : aggregate_durations }
-
-
-def calculated_stats(filtered_values_list):
-	aggregate_stats = {}
-	for key in keys:
-		c = collections.Counter()
-		for row in filtered_values_list:
-			c.update( {row[key] : row['duration']} )
-		aggregate_stats[key] = dict(c)
-
-	print(aggregate_stats)
-	return aggregate_stats
+	
