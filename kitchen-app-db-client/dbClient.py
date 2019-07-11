@@ -1,7 +1,11 @@
 import pymongo
 from flask import Flask
 from flask import request
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)
+
 
 client = pymongo.MongoClient('mongodb+srv://cluster0-uql2y.mongodb.net/test', 
 		username='groot', password='iamgroot')
