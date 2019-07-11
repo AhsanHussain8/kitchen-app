@@ -26,7 +26,6 @@ export default new Vuex.Store({
   	},
   	UPDATE_FILTER_RESULTS ({ state }, results ) {
   		this.state.filterResults = results;
-  		console.log(this.state.filterResults)
   	},
 
   },
