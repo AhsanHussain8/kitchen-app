@@ -30,7 +30,7 @@ def find_filterd_values(filter_state):
 	filtered_values_list = []
 	for filtered_action in actions.find({ "$or" : [parsed_filters]}, {'_id': False}):
 		filtered_values_list.append(filtered_action)
-	return {'results' : filtered_values_list }
+	return {'resultsList' : filtered_values_list }
 
 @app.route('/initialData')
 def send_distinct_values():

@@ -26,6 +26,7 @@ export default new Vuex.Store({
   	},
   	UPDATE_FILTER_RESULTS ({ state }, results ) {
   		this.state.filterResults = results;
+  		console.log(results)
   	},
 
   },
@@ -55,7 +56,7 @@ export default new Vuex.Store({
   		};
 
   		axios(request).then( function(response) {
-  			commit('UPDATE_FILTER_RESULTS', response.data)
+  			commit('UPDATE_FILTER_RESULTS', response.data['resultsList'])
   		})
   		.catch(function (error) {
   			console.log(error);
