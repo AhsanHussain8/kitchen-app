@@ -29,6 +29,7 @@ def find_distinct_values(filtered_values_list):
 def find_filterd_values(filter_state):
 	#exmaple: {'action': 'any', 'station': 'x', dish : 'y'}
 	parsed_filters = {}
+	
 	for filter_key, filter_value in filter_state.items():
 		if filter_value != 'any':
 			parsed_filters[filter_key] = filter_value
@@ -36,20 +37,17 @@ def find_filterd_values(filter_state):
 	filtered_values_list = []
 	for filtered_action in actions.find({ "$or" : [parsed_filters]}, {'_id': False}):
 		filtered_values_list.append(filtered_action)
+
 	return filtered_values_list
 
 def calculate_stats(filtered_values_list):
 	aggregate_stats = { key : collections.Counter() for key in keys }
+
 	for row in filtered_values_list:
 		for key in keys:
 			aggregate_stats[key].update({row[key] : row['duration']})
 
 	return { key : dict(aggregate_stats[key])  for key in keys }
-
-@app.route('/initialData')
-def send_distinct_values():
-	distinct_values_dict = find_distinct_values() 
-	return distinct_values_dict
 
 @app.route('/filterData', methods=['PUT'])
 def send_filtered_values():
