@@ -8,19 +8,12 @@ app = Flask(__name__)
 CORS(app)
 
 # connect to the database as a client and keep the actions ready to go
-try:
-	client = pymongo.MongoClient('mongodb+srv://cluster0-uql2y.mongodb.net/test', 
-			username='groot', password='iamgroot')
+client = pymongo.MongoClient('mongodb+srv://cluster0-uql2y.mongodb.net/test', 
+		username='groot', password='iamgroot')
 
-	db = client.test
+db = client.test
 
-	actions = db.actions
-except:
-	print("Database connection failed. Ensure machine is connected to the Internet.")
-	func = request.environ.get('werkzeug.server.shutdown')
-	if func is None:
-		raise RuntimeError('Not running with the Werkzeug Server')
-	func()
+actions = db.actions
 
 # keys used to filter on in webpage
 keys = ['action', 'station', 'dish']
