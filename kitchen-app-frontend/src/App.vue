@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <FilterSelection :filterKeys="filterKeys"></FilterSelection>
+    <FilterSelection :filterKeys="filterKeys" :selectedValues="selectedValues"></FilterSelection>
     <div></div>
     <ResultsList></ResultsList>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import FilterSelection from './components/FilterSelection.vue'
 import ResultsList from './components/ResultsList'
 
@@ -26,6 +26,12 @@ export default {
     ...mapActions([
       'FIND_FILTERED_DATA'
       ])
+  },
+  computed: {
+    ...mapGetters({
+      allOptions: 'GET_SINGLE_FILTER_OPTIONS',
+      selectedValues: 'GET_SINGLE_SELECTED_VALUE'
+      }),
   },
   mounted () {
     this.FIND_FILTERED_DATA();
