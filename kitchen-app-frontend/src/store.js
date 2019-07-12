@@ -26,10 +26,10 @@ export default new Vuex.Store({
   	loading: true
   },
   getters: {
-  	GET_SINGLE_FILTER_OPTIONS ( state ) {
+  	GET_FILTER_OPTIONS ( state ) {
   		return state.filterValues;
   	},
-  	GET_SINGLE_SELECTED_VALUE ( state ) {
+  	GET_SELECTED_VALUE ( state ) {
   		return state.selectedValues;
   	},
   	GET_FILTER_RESULTS ( state ) {

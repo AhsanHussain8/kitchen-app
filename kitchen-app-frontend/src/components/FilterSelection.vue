@@ -27,8 +27,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      allOptions: 'GET_SINGLE_FILTER_OPTIONS',
-      selectedValues: 'GET_SINGLE_SELECTED_VALUE',
+      allOptions: 'GET_FILTER_OPTIONS',
+      selectedValues: 'GET_SELECTED_VALUE',
       }),
   },
   watch: {
