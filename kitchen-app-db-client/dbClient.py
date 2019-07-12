@@ -26,8 +26,7 @@ def find_distinct_values(filtered_values_list, filter_state):
 		for key in keys:
 			if row[key] not in distinct_values_dict[key] and filter_state[key] == 'any':
 				distinct_values_dict[key].append(row[key])
-	print(filter_state)
-	print(distinct_values_dict)
+
 	return distinct_values_dict
 
 def find_filterd_values(filter_state):

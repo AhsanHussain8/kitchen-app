@@ -85,7 +85,7 @@ export default new Vuex.Store({
   		const selectedValues = this.state.selectedValues;
   		const request = {
   			method: 'PUT',
-  			url: 'http://localhost:5000/filterData',
+  			url: 'http://127.0.0.1:5000/filterData',
   			params: { 
   				action : selectedValues.action,
   				dish : selectedValues.dish,
