@@ -44,7 +44,10 @@ export default new Vuex.Store({
   	},
   	GET_LOADING_STATE( state ) {
   		return state.loading;
-  	}
+  	},
+    GET_FILTER_KEYS ( state ) {
+      return state.filterKeys;
+    }
 
   },
   mutations: {

@@ -29,12 +29,13 @@ export default {
   data () {
     return {
       // keys of which filter can be changed for 
-      filterKeys : ['action', 'dish', 'station'],
+      
     }
   },
   computed: {
     ...mapGetters({
-      loading: 'GET_LOADING_STATE'
+      loading: 'GET_LOADING_STATE',
+      filterKeys : 'GET_FILTER_KEYS'
     })
   },
   methods: {
