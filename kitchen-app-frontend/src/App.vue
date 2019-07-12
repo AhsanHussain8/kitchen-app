@@ -13,9 +13,9 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import FilterSelection from './components/FilterSelection.vue';
-import ResultsList from './components/ResultsList';
-import AggregateResults from './components/AggregateResults';
+import FilterSelection from './components/filter/FilterSelection.vue';
+import ResultsList from './components/list/ResultsList';
+import AggregateResults from './components/aggregate/AggregateResults';
 import Circle9 from 'vue-loading-spinner/src/components/Circle9';
 
 export default {
