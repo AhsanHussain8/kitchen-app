@@ -2,7 +2,8 @@
   <div v-if="allDurations.action.length > 0" id="donuts">
     Average Duration: {{ averageDuration }}
     <vc-donut id="donut"
-    v-for="key in filterKeys" 
+    v-for="key in filterKeys"
+    :key="key"
     :total="100.1" has-legend legend-placement="top" :sections="allDurations[key]"></vc-donut>
   </div>
 </template>
