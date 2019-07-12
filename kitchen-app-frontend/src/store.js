@@ -23,7 +23,7 @@ export default new Vuex.Store({
   		station : []
   	},
   	totalDuration: 0,
-  	loading: false
+  	loading: true
   },
   getters: {
   	GET_SINGLE_FILTER_OPTIONS ( state ) {

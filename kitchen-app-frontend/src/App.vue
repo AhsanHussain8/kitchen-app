@@ -1,9 +1,12 @@
 <template>
-  <div id="app">
+  <div id="app">    
     <FilterSelection :filterKeys="filterKeys"></FilterSelection>
     <div id="body" v-if="!loading">
       <ResultsList></ResultsList>
       <AggregateResults :filterKeys="filterKeys"></AggregateResults>
+    </div>
+    <div v-else align="center" class="spinner">
+      <Circle9 size="120px" style="width: 200px; height: 200px; transform: scale(.75);"></Circle9>
     </div>
   </div>
 </template>
@@ -13,13 +16,15 @@ import { mapActions, mapGetters } from 'vuex';
 import FilterSelection from './components/FilterSelection.vue';
 import ResultsList from './components/ResultsList';
 import AggregateResults from './components/AggregateResults';
+import Circle9 from 'vue-loading-spinner/src/components/Circle9';
 
 export default {
   name: 'app',
   components: {
     FilterSelection,
     ResultsList,
-    AggregateResults
+    AggregateResults,
+    Circle9
   },
   data () {
     return {
@@ -50,6 +55,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 30px;
+}
+
+#spinner {
 }
 
 
