@@ -96,5 +96,6 @@ export default new Vuex.Store({
   	FILTER_CHANGED ({commit, dispatch}, payload){
   		commit('UPDATE_SELECTED_VALUE', payload);
   	}
+    
   }
 })
