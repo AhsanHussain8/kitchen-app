@@ -18,10 +18,11 @@ export default new Vuex.Store({
 	},
   	filterResults: [], 
   	aggregateDurations : {
-  		action : {},
-  		dish : {},
-  		station : {}
+  		action : [],
+  		dish : [],
+  		station : []
   	},
+  	totalDuration: 0
   },
   getters: {
   	GET_SINGLE_FILTER_OPTIONS ( state ) {
@@ -32,6 +33,12 @@ export default new Vuex.Store({
   	},
   	GET_FILTER_RESULTS ( state ) {
   		return state.filterResults;
+  	},
+  	GET_DURATIONS ( state ) {
+  		return state.aggregateDurations;
+  	},
+  	GET_AVERAGE_DURATION ( state ) {
+  		return state.totalDuration/state.filterResults.length;
   	}
 
   },
@@ -42,12 +49,15 @@ export default new Vuex.Store({
   	UPDATE_FILTER_RESULTS ({ state }, results ) {
   		this.state.filterResults = results;
   	},
-  	UPDATE_AGGREGATE_DURATIONS({state }, durations ) {
+  	UPDATE_AGGREGATE_DURATIONS({ state }, durations ) {
   		this.state.aggregateDurations = durations;
   	},
-  	UPDATE_SELECTED_VALUE({state }, payload) {
+  	UPDATE_SELECTED_VALUE({ state }, payload) {
   		const key = payload.key;
   		this.state.selectedValues[key] = payload.newVal;
+  	},
+  	UPDATE_TOTAL_DURATION({ state }, duration) {
+  		this.state.totalDuration = duration;
   	}
 
   },
@@ -68,6 +78,7 @@ export default new Vuex.Store({
   			commit('UPDATE_FILTER_RESULTS', response.data['resultsList']);
   			commit('UPDATE_DISTINCT_VALUES', response.data['distinctValues']);
   			commit('UPDATE_AGGREGATE_DURATIONS', response.data['aggregateDurations']);
+  			commit('UPDATE_TOTAL_DURATION', response.data['totalDuration']);
   		})
   		.catch(function (error) {
   			console.log(error);

@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div style="width: 49%">
     <div id="buttons">
       <button @click="prevPage" :disabled="pageNumber==0"> Previous </button>
-       {{ pageNumber + 1 }} to {{ (pageNumber+1)*size }} of {{ pageCount*size }}
+       {{ (pageNumber+1)*size-size+1 }} to {{ (pageNumber+1)*size }} of {{ pageCount*size }}
       <button @click="nextPage" :disabled="pageNumber >= pageCount -1"> Next </button>
     </div>
     <div id="list" align="left">
@@ -64,11 +64,9 @@ export default {
     text-align: left;
     display: flex;
     justify-content: space-around;
-    width: 50%;
   }
 
   #buttons {
-    width: 50%;
     justify-content: space-between;
     margin: 10px;
     margin-left: 0px; 
