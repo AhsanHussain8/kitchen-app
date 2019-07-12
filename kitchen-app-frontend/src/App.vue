@@ -28,6 +28,7 @@ export default {
   },
   data () {
     return {
+      // keys of which filter can be changed for 
       filterKeys : ['action', 'dish', 'station'],
     }
   },
@@ -42,6 +43,7 @@ export default {
       ])
   },
   mounted () {
+    // get the data whenever the app begins 
     this.FIND_FILTERED_DATA();
   },
 }

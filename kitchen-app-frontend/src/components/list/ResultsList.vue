@@ -49,6 +49,7 @@ export default {
 
       return Math.ceil(l/s);
     },
+    // split list into multiple pages based on size and current page number
     paginatedData() {
       const start = this.pageNumber * this.size;
       const end = start + this.size;

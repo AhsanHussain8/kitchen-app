@@ -70,7 +70,10 @@ export default new Vuex.Store({
   },
   actions: {
   	FIND_FILTERED_DATA ({ commit, state }) {
+      // update value of loading 
   		commit('UPDATE_LOADING', true);
+
+      // send the current selected values which are being filtered on
   		const selectedValues = this.state.selectedValues;
   		const request = {
   			method: 'PUT',
@@ -87,12 +90,14 @@ export default new Vuex.Store({
   			commit('UPDATE_DISTINCT_VALUES', response.data['distinctValues']);
   			commit('UPDATE_AGGREGATE_DURATIONS', response.data['aggregateDurations']);
   			commit('UPDATE_TOTAL_DURATION', response.data['totalDuration']);
+        // update the value of loading since HTTP request finished
   			commit('UPDATE_LOADING', false);
   		})
   		.catch(function (error) {
   			console.log(error);
   		})
   	},
+    // change the selected values when the filter set changes 
   	FILTER_CHANGED ({commit, dispatch}, payload){
   		commit('UPDATE_SELECTED_VALUE', payload);
   	}

@@ -32,6 +32,7 @@ export default {
       }),
   },
   watch: {
+    // whenever the store changes the selected values, this component is responsible for updating the filter data 
     selectedValues: {
       handler() {
         this.FIND_FILTERED_DATA();

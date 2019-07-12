@@ -7,6 +7,7 @@ import collections
 app = Flask(__name__)
 CORS(app)
 
+# connect to the database as a client and keep the actions ready to go
 try:
 	client = pymongo.MongoClient('mongodb+srv://cluster0-uql2y.mongodb.net/test', 
 			username='groot', password='iamgroot')
@@ -21,9 +22,11 @@ except:
 		raise RuntimeError('Not running with the Werkzeug Server')
 	func()
 
+# keys used to filter on in webpage
 keys = ['action', 'station', 'dish']
 
 def find_distinct_values(filtered_values_list):
+	# add 'any' as the first option all the time
 	distinct_values_dict = { key : ['any'] for key in keys}
 
 	for row in filtered_values_list:
@@ -34,7 +37,9 @@ def find_distinct_values(filtered_values_list):
 	return distinct_values_dict
 
 def find_filterd_values(filter_state):
-	#exmaple: {'action': 'any', 'station': 'x', dish : 'y'}
+	# look through the filter state
+	# take out values that say 'any' -> all values accepted
+	# find with other values that are specified
 	parsed_filters = {}
 	
 	for filter_key, filter_value in filter_state.items():
@@ -48,6 +53,8 @@ def find_filterd_values(filter_state):
 	return filtered_values_list
 
 def calculate_stats(filtered_values_list):
+	# use a counter to find unique durations and total duration of the list
+	# return the durations normalized to equal 100 
 	aggregate_stats = { key : collections.Counter() for key in keys }
 	total_duration = 0
 
@@ -65,6 +72,10 @@ def calculate_stats(filtered_values_list):
 
 	return normalized_stats, total_duration
 
+# one endpoint for all the data
+# all the values in the webpage depend on list from filtering
+# TO-DO: add a cache which stores more recent list and add logic to decide if DB needs to be 
+# accessed again 
 @app.route('/filterData', methods=['PUT'])
 def send_filtered_values():
 	filter_state = request.args.to_dict()
