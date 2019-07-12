@@ -32,6 +32,7 @@ export default {
       ])
   },
   watch: {
+    // whenever the selection optoin changes, dispacth action that filter has changes
     selectedOption: function (newValue) {
       this.FILTER_CHANGED({ 'newVal' : newValue, 'key': this.filterKey });
   },

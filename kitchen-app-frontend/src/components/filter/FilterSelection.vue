@@ -27,11 +27,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      allOptions: 'GET_SINGLE_FILTER_OPTIONS',
-      selectedValues: 'GET_SINGLE_SELECTED_VALUE',
+      allOptions: 'GET_FILTER_OPTIONS',
+      selectedValues: 'GET_SELECTED_VALUE',
       }),
   },
   watch: {
+    // whenever the store changes the selected values, this component is responsible for updating the filter data 
     selectedValues: {
       handler() {
         this.FIND_FILTERED_DATA();

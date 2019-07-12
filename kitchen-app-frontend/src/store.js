@@ -23,13 +23,14 @@ export default new Vuex.Store({
   		station : []
   	},
   	totalDuration: 0,
-  	loading: true
+  	loading: true,
+    filterKeys: ['action', 'dish', 'station']
   },
   getters: {
-  	GET_SINGLE_FILTER_OPTIONS ( state ) {
+  	GET_FILTER_OPTIONS ( state ) {
   		return state.filterValues;
   	},
-  	GET_SINGLE_SELECTED_VALUE ( state ) {
+  	GET_SELECTED_VALUE ( state ) {
   		return state.selectedValues;
   	},
   	GET_FILTER_RESULTS ( state ) {
@@ -43,12 +44,19 @@ export default new Vuex.Store({
   	},
   	GET_LOADING_STATE( state ) {
   		return state.loading;
-  	}
+  	},
+    GET_FILTER_KEYS ( state ) {
+      return state.filterKeys;
+    }
 
   },
   mutations: {
   	UPDATE_DISTINCT_VALUES ({ state }, filterValues ) {
-  		this.state.filterValues = filterValues;
+      this.state.filterKeys.forEach( function(key) {
+        if ( filterValues[key].length > 1 ) {
+  		    this.state.filterValues[key] = filterValues[key];
+        }
+      }, this);
   	},
   	UPDATE_FILTER_RESULTS ({ state }, results ) {
   		this.state.filterResults = results;
@@ -70,7 +78,10 @@ export default new Vuex.Store({
   },
   actions: {
   	FIND_FILTERED_DATA ({ commit, state }) {
+      // update value of loading 
   		commit('UPDATE_LOADING', true);
+
+      // send the current selected values which are being filtered on
   		const selectedValues = this.state.selectedValues;
   		const request = {
   			method: 'PUT',
@@ -87,14 +98,17 @@ export default new Vuex.Store({
   			commit('UPDATE_DISTINCT_VALUES', response.data['distinctValues']);
   			commit('UPDATE_AGGREGATE_DURATIONS', response.data['aggregateDurations']);
   			commit('UPDATE_TOTAL_DURATION', response.data['totalDuration']);
+        // update the value of loading since HTTP request finished
   			commit('UPDATE_LOADING', false);
   		})
   		.catch(function (error) {
   			console.log(error);
   		})
   	},
+    // change the selected values when the filter set changes 
   	FILTER_CHANGED ({commit, dispatch}, payload){
   		commit('UPDATE_SELECTED_VALUE', payload);
   	}
+    
   }
 })

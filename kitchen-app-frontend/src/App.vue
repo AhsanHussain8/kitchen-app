@@ -5,17 +5,17 @@
       <ResultsList></ResultsList>
       <AggregateResults :filterKeys="filterKeys"></AggregateResults>
     </div>
-    <div v-else align="center" class="spinner">
-      <Circle9 size="120px" style="width: 200px; height: 200px; transform: scale(.75);"></Circle9>
+    <div v-else align="center">
+      <Circle9 size="120px" id="spinner"></Circle9>
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import FilterSelection from './components/FilterSelection.vue';
-import ResultsList from './components/ResultsList';
-import AggregateResults from './components/AggregateResults';
+import FilterSelection from './components/filter/FilterSelection.vue';
+import ResultsList from './components/list/ResultsList';
+import AggregateResults from './components/aggregate/AggregateResults';
 import Circle9 from 'vue-loading-spinner/src/components/Circle9';
 
 export default {
@@ -28,12 +28,14 @@ export default {
   },
   data () {
     return {
-      filterKeys : ['action', 'dish', 'station'],
+      // keys of which filter can be changed for 
+      
     }
   },
   computed: {
     ...mapGetters({
-      loading: 'GET_LOADING_STATE'
+      loading: 'GET_LOADING_STATE',
+      filterKeys : 'GET_FILTER_KEYS'
     })
   },
   methods: {
@@ -42,6 +44,7 @@ export default {
       ])
   },
   mounted () {
+    // get the data whenever the app begins 
     this.FIND_FILTERED_DATA();
   },
 }
@@ -58,7 +61,9 @@ export default {
 }
 
 #spinner {
+  width: 200px; 
+  height: 200px; 
+  transform: scale(.75);
 }
-
 
 </style>
