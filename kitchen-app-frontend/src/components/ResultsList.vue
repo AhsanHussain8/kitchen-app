@@ -2,7 +2,7 @@
   <div>
     <div id="buttons">
       <button @click="prevPage" :disabled="pageNumber==0"> Previous </button>
-       {{ pageNumber + 1 }} to {{ (pageNumber+1)*size }} of {{ pageCount*size }}
+       {{ (pageNumber+1)*size-size+1 }} to {{ (pageNumber+1)*size }} of {{ pageCount*size }}
       <button @click="nextPage" :disabled="pageNumber >= pageCount -1"> Next </button>
     </div>
     <div id="list" align="left">
