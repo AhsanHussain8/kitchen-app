@@ -3,13 +3,6 @@ By: Ahsan Hussain
 
 Welcome to Anitha's kitchen web app repo! The purpose of the web app is to give Anitha a look at the data stored in her system. The web app can filter on the actions, stations, and dishes made in her kitchen. Then the results can be looked through in a list and the durations of each eaction can be compared using donut charts. 
 
-Screenshots
-----------
-
-![screenshot 1](/Screenshots/screenshot1.png?raw=true)
-
-![screenshot 2](/Screenshots/screenshot2.png?raw=true)
-
 Instructions to run
 ----------
 
@@ -69,3 +62,10 @@ The whole application can be run without relying on Docker. The system will only
 9. Open a web browser on the host machine and visit: 
 
  `http://localhost:8080`
+
+Screenshots
+----------
+
+![screenshot 1](/Screenshots/screenshot1.png?raw=true)
+
+![screenshot 2](/Screenshots/screenshot2.png?raw=true)
