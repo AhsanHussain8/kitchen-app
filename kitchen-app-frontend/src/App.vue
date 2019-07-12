@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <FilterSelection :filterKeys="filterKeys"></FilterSelection>
-    <div id="body">
+    <div id="body" v-if="!loading">
       <ResultsList></ResultsList>
       <AggregateResults :filterKeys="filterKeys"></AggregateResults>
     </div>
@@ -25,6 +25,11 @@ export default {
     return {
       filterKeys : ['action', 'dish', 'station'],
     }
+  },
+  computed: {
+    ...mapGetters({
+      loading: 'GET_LOADING_STATE'
+    })
   },
   methods: {
     ...mapActions([

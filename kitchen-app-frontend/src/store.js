@@ -22,7 +22,8 @@ export default new Vuex.Store({
   		dish : [],
   		station : []
   	},
-  	totalDuration: 0
+  	totalDuration: 0,
+  	loading: false
   },
   getters: {
   	GET_SINGLE_FILTER_OPTIONS ( state ) {
@@ -39,6 +40,9 @@ export default new Vuex.Store({
   	},
   	GET_AVERAGE_DURATION ( state ) {
   		return state.totalDuration/state.filterResults.length;
+  	},
+  	GET_LOADING_STATE( state ) {
+  		return state.loading;
   	}
 
   },
@@ -58,11 +62,15 @@ export default new Vuex.Store({
   	},
   	UPDATE_TOTAL_DURATION({ state }, duration) {
   		this.state.totalDuration = duration;
+  	},
+  	UPDATE_LOADING({ state }, value) {
+  		this.state.loading = value;
   	}
 
   },
   actions: {
   	FIND_FILTERED_DATA ({ commit, state }) {
+  		commit('UPDATE_LOADING', true);
   		const selectedValues = this.state.selectedValues;
   		const request = {
   			method: 'PUT',
@@ -79,6 +87,7 @@ export default new Vuex.Store({
   			commit('UPDATE_DISTINCT_VALUES', response.data['distinctValues']);
   			commit('UPDATE_AGGREGATE_DURATIONS', response.data['aggregateDurations']);
   			commit('UPDATE_TOTAL_DURATION', response.data['totalDuration']);
+  			commit('UPDATE_LOADING', false);
   		})
   		.catch(function (error) {
   			console.log(error);
