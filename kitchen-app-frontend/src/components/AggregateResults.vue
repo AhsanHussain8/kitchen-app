@@ -1,5 +1,6 @@
 <template>
   <div v-if="allDurations.action.length > 0" id="donuts">
+    Average Duration: {{ averageDuration }}
     <vc-donut id="donut"
     v-for="key in filterKeys" 
     :total="100.1" has-legend legend-placement="top" :sections="allDurations[key]"></vc-donut>
@@ -23,7 +24,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      allDurations: 'GET_DURATIONS'
+      allDurations: 'GET_DURATIONS',
+      averageDuration: 'GET_AVERAGE_DURATION'
     }),
   },
 }
