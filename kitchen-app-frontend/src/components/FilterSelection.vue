@@ -1,9 +1,9 @@
 <template>
   <div class="filter">
-    <div v-for="key in filterKeys">
-      <label for="component-dropdown"> {{ key }} </label>
+    <span v-for="key in filterKeys">
+      <label id="label" for="component-dropdown"> {{ key }} </label>
       <dropdown id="component-dropdown" :filterKey="key" :options="allOptions[key]"></dropdown>
-    </div>
+    </span>
   </div>
   
 </template>
@@ -46,5 +46,15 @@ export default {
 </script>
 
 <style>
+.filter {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+}
+
+.label {
+  display: inline;
+  margin: 10%;
+}
 
 </style>

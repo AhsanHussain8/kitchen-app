@@ -30,6 +30,9 @@ export default new Vuex.Store({
   	GET_SINGLE_SELECTED_VALUE ( state ) {
   		return state.selectedValues;
   	},
+  	GET_FILTER_RESULTS ( state ) {
+  		return state.filterResults;
+  	}
 
   },
   mutations: {
