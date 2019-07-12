@@ -1,11 +1,12 @@
 <template>
-	<div class="dropdown">
+	<span class="dropdown">
       <select
+        class="select"
         v-model="selectedOption"
         @input="event => { $emit('input', event.target.value) }">
       <option v-for="option in options" :value="option">{{ option }}</option>
     </select>
-  </div>
+  </span>
   
 </template>
 
@@ -39,5 +40,8 @@ export default {
 </script>
 
 <style>
+  .select {
+    width: 100px;
+  }
 
 </style>

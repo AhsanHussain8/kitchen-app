@@ -1,19 +1,21 @@
 <template>
   <div>
-    <ul>
-      <li v-for="row in paginatedData">
-        <div>{{ row.action }}</div>
-        <span>{{ row.dish }} {{ row.station }}</span>
-        <div></div>
-        <span>{{ row.duration }} {{ row.startTime }}</span>
-      </li>
-    </ul>
-    <button @click="prevPage" :disabled="pageNumber==0">
-      Previous
-    </button>
-    <button @click="nextPage" :disabled="pageNumber >= pagecount -1">
-    Next
-    </button>
+    <div id="buttons">
+      <button @click="prevPage" :disabled="pageNumber==0"> Previous </button>
+       {{ pageNumber + 1 }} to {{ (pageNumber+1)*size }} of {{ pageCount*size }}
+      <button @click="nextPage" :disabled="pageNumber >= pageCount -1"> Next </button>
+    </div>
+    <div id="list" align="left">
+      <ul>
+        <li id="li" v-for="row in paginatedData">
+          <div><strong>{{ row.action }}</strong></div>
+          <div>Dish: <em>{{ row.dish }}</em></div> 
+          <div>Location: <em>{{ row.station }}</em></div> 
+          <div>Duration: <em>{{ row.duration }}</em></div>
+          <div>Start Time: <em>{{ row.startTime }}</em></div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -26,7 +28,7 @@ export default {
     return {
       // default to page 0
       pageNumber: 0,
-      size: 10 
+      size: 8 
     }
   },
   methods:{
@@ -58,5 +60,31 @@ export default {
 </script>
 
 <style>
+  #list {
+    text-align: left;
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+  }
+
+  #buttons {
+    width: 50%;
+    justify-content: space-between;
+    margin: 10px;
+    margin-left: 0px; 
+    display: flex;
+  }
+
+  ul{
+    border: 1px solid black;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  #li {
+  list-style-type: none;
+  padding: 10px 10px;
+  text-transform: capitalize;
+  }
 
 </style>
