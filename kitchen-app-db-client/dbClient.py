@@ -42,21 +42,32 @@ def find_filterd_values(filter_state):
 
 def calculate_stats(filtered_values_list):
 	aggregate_stats = { key : collections.Counter() for key in keys }
+	total_duration = 0
 
 	for row in filtered_values_list:
 		for key in keys:
 			aggregate_stats[key].update({row[key] : row['duration']})
 
-	return { key : dict(aggregate_stats[key])  for key in keys }
+		total_duration = sum(aggregate_stats[key].values())
+
+	normalized_stats = {}
+	for key in keys:
+		normalized_stats[key] = []
+		for unique_item, duration in dict(aggregate_stats[key]).items():
+			normalized_stats[key].append({ 'label': unique_item, 'value':  duration/total_duration*100})
+
+	print(normalized_stats)
+
+	return normalized_stats
 
 @app.route('/filterData', methods=['PUT'])
 def send_filtered_values():
 	filter_state = request.args.to_dict()
 	filtered_values_list = find_filterd_values(filter_state)
 	distinct_values_dict = find_distinct_values(filtered_values_list)
-	aggregate_durations = calculate_stats(filtered_values_list)
+	normalized_stats = calculate_stats(filtered_values_list)
 	return {
 		'resultsList' : filtered_values_list, 
 		'distinctValues' : distinct_values_dict,
-		'aggregateDurations' : aggregate_durations }
+		'aggregateDurations' : normalized_stats }
 	
