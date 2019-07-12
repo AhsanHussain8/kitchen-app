@@ -7,12 +7,19 @@ import collections
 app = Flask(__name__)
 CORS(app)
 
-client = pymongo.MongoClient('mongodb+srv://cluster0-uql2y.mongodb.net/test', 
-		username='groot', password='iamgroot')
+try:
+	client = pymongo.MongoClient('mongodb+srv://cluster0-uql2y.mongodb.net/test', 
+			username='groot', password='iamgroot')
 
-db = client.test
+	db = client.test
 
-actions = db.actions
+	actions = db.actions
+except:
+	print("Database connection failed. Ensure machine is connected to the Internet.")
+	func = request.environ.get('werkzeug.server.shutdown')
+	if func is None:
+		raise RuntimeError('Not running with the Werkzeug Server')
+	func()
 
 keys = ['action', 'station', 'dish']
 
@@ -33,7 +40,7 @@ def find_filterd_values(filter_state):
 	for filter_key, filter_value in filter_state.items():
 		if filter_value != 'any':
 			parsed_filters[filter_key] = filter_value
-
+	
 	filtered_values_list = []
 	for filtered_action in actions.find({ "$or" : [parsed_filters]}, {'_id': False}):
 		filtered_values_list.append(filtered_action)
