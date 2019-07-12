@@ -23,7 +23,8 @@ export default new Vuex.Store({
   		station : []
   	},
   	totalDuration: 0,
-  	loading: true
+  	loading: true,
+    filterKeys: ['action', 'dish', 'station']
   },
   getters: {
   	GET_FILTER_OPTIONS ( state ) {
@@ -48,7 +49,11 @@ export default new Vuex.Store({
   },
   mutations: {
   	UPDATE_DISTINCT_VALUES ({ state }, filterValues ) {
-  		this.state.filterValues = filterValues;
+      this.state.filterKeys.forEach( function(key) {
+        if ( filterValues[key].length > 1 ) {
+  		    this.state.filterValues[key] = filterValues[key];
+        }
+      }, this);
   	},
   	UPDATE_FILTER_RESULTS ({ state }, results ) {
   		this.state.filterResults = results;

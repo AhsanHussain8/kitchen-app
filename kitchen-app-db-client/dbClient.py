@@ -18,15 +18,16 @@ actions = db.actions
 # keys used to filter on in webpage
 keys = ['action', 'station', 'dish']
 
-def find_distinct_values(filtered_values_list):
+def find_distinct_values(filtered_values_list, filter_state):
 	# add 'any' as the first option all the time
 	distinct_values_dict = { key : ['any'] for key in keys}
 
 	for row in filtered_values_list:
 		for key in keys:
-			if row[key] not in distinct_values_dict[key]:
+			if row[key] not in distinct_values_dict[key] and filter_state[key] == 'any':
 				distinct_values_dict[key].append(row[key])
-
+	print(filter_state)
+	print(distinct_values_dict)
 	return distinct_values_dict
 
 def find_filterd_values(filter_state):
@@ -73,7 +74,7 @@ def calculate_stats(filtered_values_list):
 def send_filtered_values():
 	filter_state = request.args.to_dict()
 	filtered_values_list = find_filterd_values(filter_state)
-	distinct_values_dict = find_distinct_values(filtered_values_list)
+	distinct_values_dict = find_distinct_values(filtered_values_list, filter_state)
 	normalized_stats, total_duration = calculate_stats(filtered_values_list)
 	return {
 		'resultsList' : filtered_values_list, 
