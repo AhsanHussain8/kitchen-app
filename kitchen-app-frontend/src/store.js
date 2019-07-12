@@ -18,9 +18,9 @@ export default new Vuex.Store({
 	},
   	filterResults: [], 
   	aggregateDurations : {
-  		action : {},
-  		dish : {},
-  		station : {}
+  		action : [],
+  		dish : [],
+  		station : []
   	},
   },
   getters: {
@@ -32,6 +32,10 @@ export default new Vuex.Store({
   	},
   	GET_FILTER_RESULTS ( state ) {
   		return state.filterResults;
+  	},
+  	GET_DURATIONS ( state ) {
+  		console.log(state.aggregateDurations)
+  		return state.aggregateDurations;
   	}
 
   },

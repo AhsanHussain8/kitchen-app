@@ -1,21 +1,25 @@
 <template>
   <div id="app">
-    <FilterSelection :filterKeys="filterKeys" :selectedValues="selectedValues"></FilterSelection>
-    <div></div>
-    <ResultsList></ResultsList>
+    <FilterSelection :filterKeys="filterKeys"></FilterSelection>
+    <div id="body">
+      <ResultsList></ResultsList>
+      <AggregateResults :filterKeys="filterKeys"></AggregateResults>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import FilterSelection from './components/FilterSelection.vue'
-import ResultsList from './components/ResultsList'
+import FilterSelection from './components/FilterSelection.vue';
+import ResultsList from './components/ResultsList';
+import AggregateResults from './components/AggregateResults';
 
 export default {
   name: 'app',
   components: {
     FilterSelection,
     ResultsList,
+    AggregateResults
   },
   data () {
     return {
@@ -26,12 +30,6 @@ export default {
     ...mapActions([
       'FIND_FILTERED_DATA'
       ])
-  },
-  computed: {
-    ...mapGetters({
-      allOptions: 'GET_SINGLE_FILTER_OPTIONS',
-      selectedValues: 'GET_SINGLE_SELECTED_VALUE'
-      }),
   },
   mounted () {
     this.FIND_FILTERED_DATA();
@@ -48,5 +46,6 @@ export default {
   color: #2c3e50;
   margin-top: 30px;
 }
+
 
 </style>

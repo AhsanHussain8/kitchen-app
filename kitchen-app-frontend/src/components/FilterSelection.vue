@@ -16,7 +16,6 @@ export default {
   name: 'FilterSelection',
   props: {
     filterKeys: Array,
-    selectedValues: Object
   },
   components: {
     dropdown
@@ -29,6 +28,7 @@ export default {
   computed: {
     ...mapGetters({
       allOptions: 'GET_SINGLE_FILTER_OPTIONS',
+      selectedValues: 'GET_SINGLE_SELECTED_VALUE',
       }),
   },
   watch: {
