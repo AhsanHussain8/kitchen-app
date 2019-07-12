@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <FilterSelection></FilterSelection>
+    <FilterSelection :filterKeys="filterKeys"></FilterSelection>
     <div></div>
     <ResultsList></ResultsList>
   </div>
@@ -16,6 +16,11 @@ export default {
   components: {
     FilterSelection,
     ResultsList,
+  },
+  data () {
+    return {
+      filterKeys : ['action', 'dish', 'station'],
+    }
   },
   methods: {
     ...mapActions([

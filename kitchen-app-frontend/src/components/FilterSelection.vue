@@ -14,13 +14,11 @@ import dropdown from './dropdown.vue'
 
 export default {
   name: 'FilterSelection',
+  props: {
+    filterKeys: Array,
+  },
   components: {
     dropdown
-  },
-  data () {
-    return {
-      filterKeys : ['action', 'dish', 'station'],
-    }
   },
   methods: {
     ...mapActions([
@@ -36,7 +34,6 @@ export default {
   watch: {
     selectedValues: {
       handler() {
-        console.log(this.selectedValues);
         this.FIND_FILTERED_DATA();
       },
       deep: true,
