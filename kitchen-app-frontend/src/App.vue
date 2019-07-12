@@ -5,8 +5,8 @@
       <ResultsList></ResultsList>
       <AggregateResults :filterKeys="filterKeys"></AggregateResults>
     </div>
-    <div v-else align="center" class="spinner">
-      <Circle9 size="120px" style="width: 200px; height: 200px; transform: scale(.75);"></Circle9>
+    <div v-else align="center">
+      <Circle9 size="120px" id="spinner"></Circle9>
     </div>
   </div>
 </template>
@@ -58,7 +58,9 @@ export default {
 }
 
 #spinner {
+  width: 200px; 
+  height: 200px; 
+  transform: scale(.75);
 }
-
 
 </style>
