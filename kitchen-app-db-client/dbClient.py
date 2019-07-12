@@ -56,18 +56,17 @@ def calculate_stats(filtered_values_list):
 		for unique_item, duration in dict(aggregate_stats[key]).items():
 			normalized_stats[key].append({ 'label': unique_item, 'value':  duration/total_duration*100})
 
-	print(normalized_stats)
-
-	return normalized_stats
+	return normalized_stats, total_duration
 
 @app.route('/filterData', methods=['PUT'])
 def send_filtered_values():
 	filter_state = request.args.to_dict()
 	filtered_values_list = find_filterd_values(filter_state)
 	distinct_values_dict = find_distinct_values(filtered_values_list)
-	normalized_stats = calculate_stats(filtered_values_list)
+	normalized_stats, total_duration = calculate_stats(filtered_values_list)
 	return {
 		'resultsList' : filtered_values_list, 
 		'distinctValues' : distinct_values_dict,
-		'aggregateDurations' : normalized_stats }
+		'aggregateDurations' : normalized_stats,
+		'totalDuration' : total_duration }
 	
