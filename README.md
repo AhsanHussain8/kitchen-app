@@ -30,7 +30,7 @@ The frontend and backed of the web app have been placed into two different Docke
  
 The whole application can be run without relying on Docker. The system will only work with both applications run on the same machine with Internet access. Node (> v10.16.0) and python3 are dependencies. 
 
-1. Clone the source code with the following command:
+1. Clone the source code with the following command. OR unzip the contents of the source code in kitchen-app.git. 
 
 `git clone https://github.com/AhsanHussain8/kitchen-app.git`
  
